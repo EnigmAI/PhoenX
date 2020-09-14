@@ -1,5 +1,9 @@
-parser: parser.c interpreter.c main.c lexer.c tree.c
-	cc -o parser -g parser.c interpreter.c main.c lexer.c tree.c
+compiler: cg.c parser.c asm.c interpreter.c main.c lexer.c tree.c
+	cc -o compiler -g cg.c parser.c asm.c interpreter.c main.c lexer.c tree.c
 
 clean:
-	rm -f parser *.o
+	rm -f compiler *.o *.s out
+	
+run: compiler
+	./compiler test
+	cc -o out out.s
